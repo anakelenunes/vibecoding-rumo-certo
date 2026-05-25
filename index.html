@@ -76,6 +76,7 @@
       -webkit-font-smoothing: antialiased;
       font-feature-settings: 'ss01' on, 'cv11' on;
       line-height: 1.5;
+      overflow: hidden;
     }
     body {
       height: 100%;
@@ -85,6 +86,7 @@
          atrás de tudo. Assim a landscape (z-index 0) fica visível
          por cima do html mas por baixo do main (z-index 1). */
       background: transparent;
+      overflow: hidden;
     }
 
     body {
@@ -143,8 +145,9 @@
       /*
         padding-bottom alto deixa espaço para a paisagem na base
         do viewport sem que o conteúdo fique colado às colinas.
+        Reduzido para evitar scroll desnecessário na landing.
       */
-      padding: 48px 24px 320px;
+      padding: 48px 24px 120px;
       display: flex;
       justify-content: center;
       position: relative;
@@ -402,7 +405,6 @@
       align-items: center;
       gap: 16px;
       padding: 16px 0;
-      border-bottom: 1px solid var(--border);
     }
     .pref-row:last-child { border-bottom: none; }
 
@@ -571,6 +573,46 @@
       justify-content: space-between;
       gap: 16px;
       margin-bottom: 8px;
+    }
+
+    .result-actions-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-favorite {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-soft);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .btn-favorite:hover {
+      border-color: #f43f5e;
+      color: #f43f5e;
+      background: #fff1f2;
+    }
+    .btn-favorite.active {
+      background: #f43f5e;
+      color: white;
+      border-color: #f43f5e;
+    }
+    .btn-favorite svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+    .btn-favorite.active svg {
+      fill: currentColor;
     }
     .result-title {
       font-size: 20px;
@@ -993,6 +1035,18 @@
       flex-direction: column;
       position: relative;
       z-index: 1;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    /* Landing screen specifically without scroll */
+    #screen-landing.active {
+      overflow: hidden;
+    }
+
+    #screen-landing.active .landing-hero {
+      padding-bottom: 0;
+      min-height: calc(100vh - 60px); /* adjust based on padding/header */
     }
 
     /*
@@ -1739,16 +1793,22 @@
       </section>
 
       <section id="screen-favorites" class="screen">
-        <div class="placeholder-area">
-          <div class="placeholder-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9 12 2"/>
-            </svg>
-          </div>
+        <div class="results-intro">
           <h2>Favoritos</h2>
-          <p>Aqui vão ficar os cursos e profissões que marcas com estrela durante a tua exploração. Em breve.</p>
-          <button class="btn btn-outline" onclick="navigateTo('landing')">← Voltar à página inicial</button>
+          <p class="hint">Os caminhos que guardaste durante a tua exploração.</p>
+        </div>
+        <div id="favorites-list">
+          <!-- Lista de favoritos renderizada via JS -->
+          <div class="placeholder-area">
+            <div class="placeholder-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9 12 2"/>
+              </svg>
+            </div>
+            <p>Ainda não tens nenhum caminho guardado.</p>
+            <button class="btn btn-outline" onclick="navigateTo('landing')">← Explorar</button>
+          </div>
         </div>
       </section>
 
@@ -2263,7 +2323,8 @@
       },
       grade: null,                   // número 0-20
       location: "",                  // texto livre
-      educationType: null            // "superior" | "profissional" | "indiferente"
+      educationType: null,            // "superior" | "profissional" | "indiferente"
+      favorites: []                  // caminhos guardados
     };
 
     // Ordem dos ecrãs do questionário — usada por goNext/goBack.
@@ -2672,11 +2733,22 @@
         `${matches.length} caminhos para explorares.`;
 
       // Construir cada cartão
-      list.innerHTML = matches.map((m, i) => `
+      list.innerHTML = matches.map((m, i) => {
+        const isFavorited = state.favorites.some(fav => fav.title === m.title);
+        return `
         <article class="result-card ${i === 0 ? "top" : ""}">
           <div class="result-head">
             <h2 class="result-title">${m.title}</h2>
-            <span class="result-score">${m.score}% compatível</span>
+            <div class="result-actions-top">
+              <span class="result-score">${m.score}% compatível</span>
+              <button class="btn-favorite ${isFavorited ? 'active' : ''}" 
+                      onclick="toggleFavorite('${m.title.replace(/'/g, "\\'")}')" 
+                      title="${isFavorited ? 'Remover dos favoritos' : 'Guardar nos favoritos'}">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </button>
+            </div>
           </div>
           <p class="result-desc">${m.description}</p>
 
@@ -2711,8 +2783,71 @@
 
           ${m.warning ? `<div class="alert"><strong>Atenção:</strong> ${m.warning}</div>` : ""}
         </article>
-      `).join("");
+      `;
+      }).join("");
     }
+
+    function toggleFavorite(title) {
+      const index = state.favorites.findIndex(f => f.title === title);
+      if (index >= 0) {
+        state.favorites.splice(index, 1);
+      } else {
+        const matches = computeMatches();
+        const item = matches.find(m => m.title === title);
+        if (item) state.favorites.push(item);
+      }
+      renderResults();
+       if (state.currentScreen === 'screen-favorites') renderFavorites();
+     }
+
+     function renderFavorites() {
+       const list = document.getElementById("favorites-list");
+       if (!state.favorites.length) {
+         list.innerHTML = `
+           <div class="placeholder-area">
+             <div class="placeholder-icon">
+               <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                 <polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9 12 2"/>
+               </svg>
+             </div>
+             <p>Ainda não tens nenhum caminho guardado.</p>
+             <button class="btn btn-outline" onclick="navigateTo('landing')">← Explorar</button>
+           </div>
+         `;
+         return;
+       }
+
+       list.innerHTML = state.favorites.map(m => `
+         <article class="result-card">
+           <div class="result-head">
+             <h2 class="result-title">${m.title}</h2>
+             <div class="result-actions-top">
+               <span class="result-score">${m.score}% compatível</span>
+               <button class="btn-favorite active" 
+                       onclick="toggleFavorite('${m.title.replace(/'/g, "\\'")}')" 
+                       title="Remover dos favoritos">
+                 <svg viewBox="0 0 24 24">
+                   <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                 </svg>
+               </button>
+             </div>
+           </div>
+           <p class="result-desc">${m.description}</p>
+           
+           <div class="result-meta">
+             <div class="meta-item">
+               <div class="meta-label">Cursos</div>
+               <div class="meta-value">${m.cursos.join(", ")}</div>
+             </div>
+             <div class="meta-item">
+               <div class="meta-label">Média típica de entrada</div>
+               <div class="meta-value">~ ${m.mediaEntrada}</div>
+             </div>
+           </div>
+         </article>
+       `).join("");
+     }
 
     // =========================================================
     // 9) INICIALIZAÇÃO
@@ -2741,6 +2876,7 @@
     window.toggleSubject = toggleSubject;
     window.toggleActivity = toggleActivity;
     window.selectEducationType = selectEducationType;
+    window.toggleFavorite = toggleFavorite;
 
     /*
       ============================================================
@@ -2784,7 +2920,10 @@
       // Esconder todos os ecrãs, mostrar o alvo
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       const target = document.getElementById(targetId);
-      if (target) target.classList.add('active');
+      if (target) {
+        target.classList.add('active');
+        if (area === 'favorites') renderFavorites();
+      }
 
       // Atualizar estado interno da app
       state.currentScreen = targetId;
