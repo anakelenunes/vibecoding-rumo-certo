@@ -43,9 +43,6 @@
       --accent-soft: #d1fae5;   /* fundo de chips/highlights */
       --accent-ink: #064e3b;    /* texto sobre fundos verde claro */
 
-      /* Accent black */
-      --accent-blue: #000000;        /* preto contrast */
-
       /* Estado */
       --warning: #b45309;       /* alertas de desalinhamento */
       --warning-soft: #fef3c7;
@@ -103,30 +100,25 @@
       ============================================================
       3. LAYOUT BASE
       ------------------------------------------------------------
-      Header fixo simples + área principal centrada com largura
-      máxima confortável para leitura/preenchimento.
-
-      Importante: header e main ficam com position:relative e
-      z-index:1 para garantir que aparecem POR CIMA da ilustração
-      de paisagem (que é position:fixed, z-index:0).
+      header (antigo) é escondido porque agora temos sidebar.
+      main fica dentro do .content (área à direita da sidebar)
+      e usa padding mais discreto.
       ============================================================
     */
-    header {
-      padding: 20px 32px;
-      border-bottom: 1px solid var(--border);
-      /* sem background sólido — fundo da app fica visível, e a
-         paisagem pode aparecer atrás se necessário */
-      background: transparent;
+    header { display: none; }
+
+    main {
+      flex: 1;
+      padding: 32px 32px 280px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       position: relative;
       z-index: 1;
     }
 
     .logo {
       font-weight: 700;
-      font-size: 18px;
+      font-size: 17px;
       letter-spacing: -0.01em;
       display: flex;
       align-items: center;
@@ -142,7 +134,7 @@
     }
 
     .header-meta {
-      font-size: 17px;
+      font-size: 13px;
       color: var(--text-muted);
     }
 
@@ -195,7 +187,7 @@
       ============================================================
     */
     .eyebrow {
-      font-size: 15px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -204,7 +196,7 @@
     }
 
     h1 {
-      font-size: clamp(28px, 5vw, 44px);
+      font-size: clamp(28px, 4vw, 40px);
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.15;
@@ -212,21 +204,21 @@
     }
 
     h2 {
-      font-size: 28px;
+      font-size: 22px;
       font-weight: 600;
       letter-spacing: -0.01em;
       margin-bottom: 8px;
     }
 
     .lead {
-      font-size: 18px;
+      font-size: 17px;
       color: var(--text-muted);
       max-width: 56ch;
       margin-bottom: 32px;
     }
 
     .hint {
-      font-size: 16px;
+      font-size: 14px;
       color: var(--text-muted);
       margin-bottom: 24px;
     }
@@ -248,7 +240,7 @@
       padding: 14px 22px;
       border-radius: var(--r);
       border: 1px solid transparent;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
       transition: all 0.15s ease;
       background: transparent;
@@ -306,7 +298,7 @@
       border-radius: 999px;
     }
     .progress-label {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-muted);
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
@@ -334,7 +326,7 @@
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
-      font-size: 17px;
+      font-size: 14px;
       font-weight: 500;
       color: var(--text);
       transition: all 0.12s ease;
@@ -373,7 +365,7 @@
       text-align: left;
       transition: all 0.12s ease;
       font-weight: 500;
-      font-size: 18px;
+      font-size: 14px;
     }
     .option:hover {
       border-color: #c9c5bd;
@@ -385,7 +377,7 @@
     }
     .option-sub {
       display: block;
-      font-size: 16px;
+      font-size: 12px;
       font-weight: 400;
       color: var(--text-muted);
       margin-top: 4px;
@@ -410,15 +402,16 @@
       align-items: center;
       gap: 16px;
       padding: 16px 0;
+      border-bottom: 1px solid var(--border);
     }
     .pref-row:last-child { border-bottom: none; }
 
     .pref-label {
       font-weight: 600;
-      font-size: 18px;
+      font-size: 15px;
     }
     .pref-sub {
-      font-size: 16px;
+      font-size: 13px;
       color: var(--text-muted);
       margin-top: 2px;
     }
@@ -461,7 +454,7 @@
     .pref-value {
       font-variant-numeric: tabular-nums;
       font-weight: 600;
-      font-size: 18px;
+      font-size: 14px;
       color: var(--accent);
       min-width: 36px;
       text-align: right;
@@ -481,7 +474,7 @@
       margin-bottom: 16px;
     }
     .field label {
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 500;
       color: var(--text-muted);
     }
@@ -490,7 +483,7 @@
       border: 1px solid var(--border);
       border-radius: var(--r-sm);
       background: var(--surface);
-      font-size: 19px;
+      font-size: 15px;
       color: var(--text);
       transition: border-color 0.12s ease;
     }
@@ -580,7 +573,7 @@
       margin-bottom: 8px;
     }
     .result-title {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 700;
       letter-spacing: -0.01em;
     }
@@ -592,7 +585,7 @@
       background: var(--accent-soft);
       color: var(--accent-ink);
       border-radius: 999px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
@@ -600,7 +593,7 @@
 
     .result-desc {
       color: var(--text-muted);
-      font-size: 16px;
+      font-size: 15px;
       margin-bottom: 20px;
     }
 
@@ -614,21 +607,21 @@
       margin-bottom: 20px;
     }
     .meta-item .meta-label {
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--text-muted);
     }
     .meta-item .meta-value {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
       margin-top: 4px;
       color: var(--text);
     }
 
     .section-h {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -638,7 +631,7 @@
 
     .reasons li, .steps li {
       padding: 6px 0 6px 22px;
-      font-size: 16px;
+      font-size: 14px;
       color: var(--text);
       list-style: none;
       position: relative;
@@ -665,7 +658,7 @@
       width: 20px; height: 20px;
       background: var(--surface-2);
       border-radius: 50%;
-      font-size: 14px;
+      font-size: 11px;
       font-weight: 700;
       color: var(--text-muted);
       display: inline-flex;
@@ -680,7 +673,7 @@
       background: var(--warning-soft);
       border-left: 3px solid var(--warning);
       border-radius: var(--r-sm);
-      font-size: 15px;
+      font-size: 13px;
       color: #78350f;
       margin-top: 16px;
     }
@@ -775,15 +768,454 @@
     */
     @media (max-width: 600px) {
       header { padding: 16px 20px; }
-      main { padding: 32px 16px 220px; }
+      main { padding: 24px 16px 220px; }
       .result-card { padding: 20px; }
       .nav { flex-direction: row-reverse; }
-      h1 { font-size: 33px; }
+      h1 { font-size: 26px; }
       .landscape { height: 220px; }
     }
     /*
       ============================================================
-      17. CHATBOT FLUTUANTE
+      17. APP SHELL — SIDEBAR + CONTENT AREA
+      ------------------------------------------------------------
+      Estrutura: .app-shell é flex horizontal com .sidebar à
+      esquerda e .content à direita. A sidebar é colapsável
+      (240px → 68px) com transição suave.
+
+      A sidebar tem fundo translúcido para deixar a paisagem
+      respirar por trás. Item ativo destacado com fundo verde
+      suave (--accent-soft).
+
+      Persiste em todos os ecrãs (landing, questionário, resultados).
+      ============================================================
+    */
+
+    .app-shell {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      /* Translúcida: deixa a paisagem ver-se subtilmente atrás */
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-right: 1px solid rgba(229, 227, 221, 0.5);
+      display: flex;
+      flex-direction: column;
+      padding: 20px 16px;
+      transition: width 0.25s ease, padding 0.25s ease;
+      /* Fica fixa em altura completa para a paisagem fluir por trás */
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 2;
+    }
+
+    /* Sidebar colapsada: só 68px de largura */
+    .sidebar.collapsed { width: 68px; padding: 20px 12px; }
+
+    /* Cabeçalho da sidebar: logo + toggle */
+    .sidebar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+      min-height: 32px;
+    }
+
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow: hidden;
+      min-width: 0;
+    }
+    .sidebar-logo-dot {
+      width: 28px; height: 28px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .sidebar-logo-dot::after {
+      content: "";
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px; height: 10px;
+      background: white;
+      border-radius: 50%;
+    }
+    .sidebar-logo-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      opacity: 1;
+      transition: opacity 0.15s ease;
+    }
+    .sidebar-logo-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .sidebar-logo-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* Quando colapsada, esconde o texto do logo */
+    .sidebar.collapsed .sidebar-logo-text { opacity: 0; pointer-events: none; }
+
+    /* Botão de toggle (colapsar / expandir) */
+    .sidebar-toggle {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(241, 240, 236, 0.6);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: background 0.12s ease, color 0.12s ease;
+      flex-shrink: 0;
+    }
+    .sidebar-toggle:hover {
+      background: rgba(241, 240, 236, 0.9);
+      color: var(--text);
+    }
+    .sidebar-toggle svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.25s ease;
+    }
+    .sidebar.collapsed .sidebar-toggle svg { transform: rotate(180deg); }
+
+    /* Lista de itens de navegação */
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: left;
+      width: 100%;
+      transition: background 0.12s ease, color 0.12s ease;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .sidebar-item:hover {
+      background: rgba(241, 240, 236, 0.7);
+    }
+    .sidebar-item.active {
+      background: var(--accent-soft);
+      color: var(--accent-ink);
+      font-weight: 600;
+    }
+    .sidebar-item .icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sidebar-item .icon svg {
+      width: 18px;
+      height: 18px;
+    }
+    .sidebar-item .label {
+      opacity: 1;
+      transition: opacity 0.15s ease;
+    }
+    .sidebar.collapsed .sidebar-item { justify-content: center; padding: 10px; }
+    .sidebar.collapsed .sidebar-item .label { opacity: 0; pointer-events: none; width: 0; }
+
+    /* Item destacado "Novo percurso" (visual de CTA) */
+    .sidebar-item.cta:not(.active) {
+      background: var(--accent);
+      color: white;
+    }
+    .sidebar-item.cta:not(.active):hover {
+      background: var(--accent-hover);
+    }
+    .sidebar-item.cta .icon-plus {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .sidebar-item.cta.active .icon-plus {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Footer da sidebar (Definições) */
+    .sidebar-footer {
+      padding-top: 16px;
+      border-top: 1px solid rgba(229, 227, 221, 0.5);
+    }
+
+    /* ÁREA DE CONTEÚDO */
+    .content {
+      flex: 1;
+      min-width: 0;          /* impede overflow horizontal em flex */
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
+
+    /*
+      Mobile: sidebar transforma-se em drawer.
+      Default colapsada; ao clicar no toggle, expande sobre o conteúdo.
+    */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        height: 100vh;
+        width: 68px;
+        z-index: 30;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+      }
+      .sidebar:not(.collapsed) { width: 240px; }
+      .content { margin-left: 68px; }
+      .sidebar.collapsed + .content { margin-left: 68px; }
+    }
+
+    @media (max-width: 480px) {
+      .sidebar { width: 60px; padding: 16px 10px; }
+      .content { margin-left: 60px; }
+    }
+
+    /*
+      ============================================================
+      18. LANDING — HERO COM CHAT CENTRAL
+      ------------------------------------------------------------
+      Ecrã inicial renovado: saudação + cartão de chat destacado
+      no centro, com sugestões clicáveis e input. Por baixo, um
+      botão secundário para iniciar o questionário estruturado.
+      ============================================================
+    */
+
+    .landing-hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 32px 80px;
+      gap: 32px;
+      min-height: 80vh;
+    }
+
+    .landing-greeting {
+      text-align: center;
+      max-width: 600px;
+    }
+    .landing-greeting h1 {
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .landing-greeting p {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    /* Cartão central de chat */
+    .landing-chat-card {
+      width: 100%;
+      max-width: 640px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .landing-chat-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .landing-chat-suggestion {
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      background: rgba(247, 246, 243, 0.6);
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.12s ease;
+      font-family: inherit;
+    }
+    .landing-chat-suggestion:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent-ink);
+    }
+
+    .landing-chat-input-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      background: rgba(247, 246, 243, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 8px;
+      transition: border-color 0.12s ease;
+    }
+    .landing-chat-input-row:focus-within { border-color: var(--accent); }
+
+    .landing-chat-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 8px 10px;
+      font-size: 14px;
+      color: var(--text);
+      font-family: inherit;
+      resize: none;
+      max-height: 120px;
+      line-height: 1.4;
+    }
+    .landing-chat-input::placeholder { color: var(--text-soft); }
+
+    .landing-chat-send {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.12s ease;
+    }
+    .landing-chat-send:hover:not(:disabled) { background: var(--accent-hover); }
+    .landing-chat-send:disabled {
+      background: var(--surface-2);
+      color: var(--text-soft);
+      cursor: not-allowed;
+    }
+    .landing-chat-send svg { width: 18px; height: 18px; }
+
+    /* Divisor "ou" + CTA secundário */
+    .landing-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 360px;
+      width: 100%;
+      color: var(--text-soft);
+      font-size: 12px;
+    }
+    .landing-divider::before, .landing-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(229, 227, 221, 0.7);
+    }
+
+    .landing-secondary-cta {
+      padding: 14px 28px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+    .landing-secondary-cta:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* As outras áreas (Os meus percursos, Explorar áreas, Recursos, Favoritos)
+       são placeholders simples na v1 — apenas mostram uma mensagem informando
+       que estão "em construção". Em produção, cada uma teria o seu próprio ecrã. */
+    .placeholder-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 32px;
+      text-align: center;
+      gap: 12px;
+      min-height: 60vh;
+    }
+    .placeholder-area .placeholder-icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+    .placeholder-area h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .placeholder-area p {
+      color: var(--text-muted);
+      max-width: 420px;
+      font-size: 14px;
+    }
+
+    /*
+      ============================================================
+      19. CHATBOT FLUTUANTE
       ------------------------------------------------------------
       Botão circular no canto inferior direito que abre um painel
       de conversa. Estilo consistente com o resto da app: verde
@@ -806,7 +1238,7 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background: var(--accent-blue);
+      background: var(--accent);
       color: white;
       border: none;
       box-shadow: 0 8px 24px rgba(4, 120, 87, 0.35), 0 2px 6px rgba(0,0,0,0.1);
@@ -823,8 +1255,11 @@
     }
     .chat-fab svg { width: 24px; height: 24px; }
 
-    /* Esconder FAB quando o painel está aberto (no mobile faz sentido) */
+    /* Esconder FAB quando o painel está aberto (no mobile faz sentido)
+       OU quando estamos na landing (que já tem o chat central destacado) */
     .chat-fab.hidden { display: none; }
+    /* Esconder FAB sempre que o screen-landing está ativo */
+    body:has(#screen-landing.active) .chat-fab { display: none; }
 
     /* Painel da conversa */
     .chat-panel {
@@ -867,7 +1302,7 @@
       align-items: center;
       gap: 10px;
       font-weight: 600;
-      font-size: 16px;
+      font-size: 15px;
     }
     .chat-header-dot {
       width: 8px; height: 8px;
@@ -934,7 +1369,7 @@
       background: #fee2e2;
       color: #991b1b;
       border-bottom-left-radius: 4px;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     /* Indicador "a escrever" (3 pontinhos animados) */
@@ -972,7 +1407,7 @@
       border: 1px solid var(--border);
       background: var(--surface);
       border-radius: 10px;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text);
       text-align: left;
       cursor: pointer;
@@ -1034,7 +1469,7 @@
 
     /* Disclaimer no fundo */
     .chat-disclaimer {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-soft);
       text-align: center;
       padding: 6px 14px 10px;
@@ -1071,37 +1506,265 @@
     do tempo estimado à direita.
     ================================================================
   -->
-  <header>
-    <div class="logo">
-      <span class="logo-dot"></span>
-      Copiloto de Carreira
-    </div>
-    <div class="header-meta">~ 10 min</div>
-  </header>
+  <!--
+    ================================================================
+    APP SHELL — SIDEBAR + ÁREA DE CONTEÚDO
+    ----------------------------------------------------------------
+    Estrutura permanente: sidebar à esquerda (colapsável), conteúdo
+    principal à direita. A paisagem (mais abaixo) vive em
+    position:fixed por trás de tudo.
+    ================================================================
+  -->
+  <div class="app-shell">
 
-  <main>
+    <!-- ============ SIDEBAR ============ -->
+    <aside id="sidebar" class="sidebar" aria-label="Navegação principal">
+
+      <!-- Cabeçalho da sidebar: logo + toggle -->
+      <div class="sidebar-head">
+        <div class="sidebar-logo">
+          <div class="sidebar-logo-dot"></div>
+          <div class="sidebar-logo-text">
+            <span class="sidebar-logo-title">Rumo Certo</span>
+            <span class="sidebar-logo-sub">Copiloto de carreira</span>
+          </div>
+        </div>
+        <button id="sidebar-toggle" class="sidebar-toggle"
+                aria-label="Colapsar/expandir menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Navegação principal -->
+      <nav class="sidebar-nav">
+        <!-- Novo percurso — item CTA, ativo na landing -->
+        <button class="sidebar-item cta active" data-area="landing"
+                onclick="navigateTo('landing')" title="Novo percurso">
+          <span class="icon icon-plus">+</span>
+          <span class="label">Novo percurso</span>
+        </button>
+
+        <!-- Os meus percursos -->
+        <button class="sidebar-item" data-area="my-paths"
+                onclick="navigateTo('my-paths')" title="Os meus percursos">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <path d="M8 10l3 3 5-5"/>
+            </svg>
+          </span>
+          <span class="label">Os meus percursos</span>
+        </button>
+
+        <!-- Explorar áreas -->
+        <button class="sidebar-item" data-area="explore"
+                onclick="navigateTo('explore')" title="Explorar áreas">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3a14 14 0 0 1 0 18M3 12h18"/>
+            </svg>
+          </span>
+          <span class="label">Explorar áreas</span>
+        </button>
+
+        <!-- Recursos -->
+        <button class="sidebar-item" data-area="resources"
+                onclick="navigateTo('resources')" title="Recursos">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/>
+              <path d="M4 16a4 4 0 0 1 4-4h12"/>
+            </svg>
+          </span>
+          <span class="label">Recursos</span>
+        </button>
+
+        <!-- Favoritos -->
+        <button class="sidebar-item" data-area="favorites"
+                onclick="navigateTo('favorites')" title="Favoritos">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9 12 2"/>
+            </svg>
+          </span>
+          <span class="label">Favoritos</span>
+        </button>
+      </nav>
+
+      <!-- Footer: Definições -->
+      <div class="sidebar-footer">
+        <button class="sidebar-item" onclick="navigateTo('settings')" title="Definições">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </span>
+          <span class="label">Definições</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ============ ÁREA DE CONTEÚDO ============ -->
+    <div class="content">
+      <main>
     <div class="container">
 
       <!--
         ============================================================
-        ECRÃ 0 — LANDING
+        ECRÃ 0 — LANDING (NOVO DESIGN COM CHAT CENTRAL)
         ------------------------------------------------------------
-        Foco em comunicar a promessa: "3 caminhos plausíveis em
-        menos de 10 minutos". É a primeira coisa que o utilizador
-        vê e tem de reduzir ansiedade, não aumentá-la.
+        Hero centrado com:
+          - Saudação grande
+          - Cartão de chat destacado (sugestões + input)
+          - Divisor "ou"
+          - Botão secundário para iniciar o questionário
+
+        O chat aqui é a entrada PRINCIPAL. Quem prefere caminho
+        estruturado clica no botão para arrancar o quiz.
         ============================================================
       -->
       <section id="screen-landing" class="screen active">
-        <p class="eyebrow">Para alunos do 9.º ao 12.º</p>
-        <h1>Não saberes que carreira seguir é normal. Vamos clarificar.</h1>
-        <p class="lead">
-          Responde a algumas perguntas sobre ti — interesses, disciplinas, preferências —
-          e devolvemos-te 3 a 5 caminhos profissionais que fazem sentido para o teu perfil,
-          com cursos, médias e próximos passos. Sem testes longos. Sem jargão.
-        </p>
-        <button class="btn btn-primary" onclick="startQuiz()">
-          Começar →
-        </button>
+        <div class="landing-hero">
+          <div class="landing-greeting">
+            <h1>Olá! Em que posso ajudar?</h1>
+            <p>Pergunta sobre cursos, profissões, exames — ou começa o teu percurso personalizado.</p>
+          </div>
+
+          <!-- Cartão de chat central -->
+          <div class="landing-chat-card">
+            <div class="landing-chat-suggestions">
+              <button class="landing-chat-suggestion"
+                      onclick="askLanding('Que disciplinas devo escolher no 10.º ano para Medicina?')">
+                Disciplinas para Medicina?
+              </button>
+              <button class="landing-chat-suggestion"
+                      onclick="askLanding('Qual a diferença entre universidade e politécnico?')">
+                Universidade vs politécnico
+              </button>
+              <button class="landing-chat-suggestion"
+                      onclick="askLanding('Como funciona o concurso nacional de acesso ao ensino superior?')">
+                Como funciona o CNA?
+              </button>
+              <button class="landing-chat-suggestion"
+                      onclick="askLanding('Que cursos posso seguir se gosto da área de letras?')">
+                Cursos de letras
+              </button>
+            </div>
+
+            <div class="landing-chat-input-row">
+              <textarea id="landing-chat-input" class="landing-chat-input" rows="1"
+                        placeholder="Pergunta-me alguma coisa…"
+                        aria-label="Pergunta"></textarea>
+              <button id="landing-chat-send" class="landing-chat-send"
+                      aria-label="Enviar" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"/>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Divisor + CTA secundário -->
+          <div class="landing-divider"><span>ou</span></div>
+
+          <button class="landing-secondary-cta" onclick="startQuiz()">
+            Iniciar questionário · ~10 min →
+          </button>
+        </div>
+      </section>
+
+      <!--
+        ============================================================
+        ECRÃS PLACEHOLDER — Os meus percursos, Explorar áreas,
+        Recursos, Favoritos, Definições.
+        Estes ainda não estão implementados; mostram só uma mensagem
+        informativa. Em produção, cada um teria o seu próprio ecrã.
+        ============================================================
+      -->
+      <section id="screen-my-paths" class="screen">
+        <div class="placeholder-area">
+          <div class="placeholder-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <path d="M8 10l3 3 5-5"/>
+            </svg>
+          </div>
+          <h2>Os meus percursos</h2>
+          <p>Aqui vão aparecer os percursos profissionais que recomendámos para ti, e os que guardaste para revisitar mais tarde. Esta área estará disponível em breve.</p>
+          <button class="btn btn-outline" onclick="navigateTo('landing')">← Voltar à página inicial</button>
+        </div>
+      </section>
+
+      <section id="screen-explore" class="screen">
+        <div class="placeholder-area">
+          <div class="placeholder-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3a14 14 0 0 1 0 18M3 12h18"/>
+            </svg>
+          </div>
+          <h2>Explorar áreas</h2>
+          <p>Em breve, vais poder explorar áreas profissionais sem fazer o questionário: saúde, engenharia, artes, comunicação, ciências sociais, e mais.</p>
+          <button class="btn btn-outline" onclick="navigateTo('landing')">← Voltar à página inicial</button>
+        </div>
+      </section>
+
+      <section id="screen-resources" class="screen">
+        <div class="placeholder-area">
+          <div class="placeholder-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/>
+              <path d="M4 16a4 4 0 0 1 4-4h12"/>
+            </svg>
+          </div>
+          <h2>Recursos</h2>
+          <p>Guias práticos, links úteis para o DGES, calendário de exames, e outras ferramentas para te ajudar a navegar o ensino superior. Em construção.</p>
+          <button class="btn btn-outline" onclick="navigateTo('landing')">← Voltar à página inicial</button>
+        </div>
+      </section>
+
+      <section id="screen-favorites" class="screen">
+        <div class="placeholder-area">
+          <div class="placeholder-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9 12 2"/>
+            </svg>
+          </div>
+          <h2>Favoritos</h2>
+          <p>Aqui vão ficar os cursos e profissões que marcas com estrela durante a tua exploração. Em breve.</p>
+          <button class="btn btn-outline" onclick="navigateTo('landing')">← Voltar à página inicial</button>
+        </div>
+      </section>
+
+      <section id="screen-settings" class="screen">
+        <div class="placeholder-area">
+          <div class="placeholder-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </div>
+          <h2>Definições</h2>
+          <p>Preferências da conta, notificações, idioma. Em construção.</p>
+          <button class="btn btn-outline" onclick="navigateTo('landing')">← Voltar à página inicial</button>
+        </div>
       </section>
 
       <!--
@@ -1272,6 +1935,8 @@
 
     </div>
   </main>
+    </div> <!-- /.content -->
+  </div> <!-- /.app-shell -->
 
   <script>
     /*
@@ -1661,6 +2326,10 @@
       ["next-1","next-2","next-3","next-5"].forEach(id => document.getElementById(id).disabled = true);
 
       showScreen("screen-landing");
+      // Marcar "Novo percurso" como ativo na sidebar
+      document.querySelectorAll('.sidebar-item[data-area]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.area === 'landing');
+      });
     }
 
     // =========================================================
@@ -2072,6 +2741,119 @@
     window.toggleSubject = toggleSubject;
     window.toggleActivity = toggleActivity;
     window.selectEducationType = selectEducationType;
+
+    /*
+      ============================================================
+      10) SIDEBAR — Colapsar/expandir + navegação entre áreas
+      ============================================================
+    */
+
+    // Toggle colapsar / expandir sidebar (persiste em localStorage)
+    const $sidebar = document.getElementById('sidebar');
+    const $sidebarToggle = document.getElementById('sidebar-toggle');
+
+    // Restaurar estado anterior (se houver)
+    if (localStorage.getItem('sidebar-collapsed') === '1') {
+      $sidebar.classList.add('collapsed');
+    }
+
+    $sidebarToggle.addEventListener('click', () => {
+      $sidebar.classList.toggle('collapsed');
+      localStorage.setItem(
+        'sidebar-collapsed',
+        $sidebar.classList.contains('collapsed') ? '1' : '0'
+      );
+    });
+
+    /**
+     * Navegação entre áreas (Novo percurso, Os meus percursos, etc).
+     * Mostra o ecrã correspondente e marca o item ativo na sidebar.
+     */
+    function navigateTo(area) {
+      // Mapear área → id do ecrã
+      const screenMap = {
+        'landing':    'screen-landing',
+        'my-paths':   'screen-my-paths',
+        'explore':    'screen-explore',
+        'resources':  'screen-resources',
+        'favorites':  'screen-favorites',
+        'settings':   'screen-settings',
+      };
+      const targetId = screenMap[area] || 'screen-landing';
+
+      // Esconder todos os ecrãs, mostrar o alvo
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById(targetId);
+      if (target) target.classList.add('active');
+
+      // Atualizar estado interno da app
+      state.currentScreen = targetId;
+
+      // Marcar item ativo na sidebar
+      document.querySelectorAll('.sidebar-item[data-area]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.area === area);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.navigateTo = navigateTo;
+
+    /*
+      ============================================================
+      11) LANDING — Chat central
+      ------------------------------------------------------------
+      Quando o utilizador escreve uma pergunta no input central da
+      landing (ou clica numa sugestão), abrimos o painel do chatbot
+      flutuante e enviamos a pergunta para lá. Não duplicamos
+      lógica: reutilizamos o chatbot que já existe.
+      ============================================================
+    */
+
+    const $landingInput = document.getElementById('landing-chat-input');
+    const $landingSend  = document.getElementById('landing-chat-send');
+
+    // Auto-resize do textarea
+    $landingInput.addEventListener('input', () => {
+      $landingInput.style.height = 'auto';
+      $landingInput.style.height = Math.min($landingInput.scrollHeight, 120) + 'px';
+      $landingSend.disabled = !$landingInput.value.trim();
+    });
+
+    // Enter envia, Shift+Enter quebra linha
+    $landingInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        const text = $landingInput.value.trim();
+        if (text) askLanding(text);
+      }
+    });
+
+    $landingSend.addEventListener('click', () => {
+      const text = $landingInput.value.trim();
+      if (text) askLanding(text);
+    });
+
+    /**
+     * Pergunta a partir da landing — abre o chatbot flutuante e
+     * envia a mensagem. Função chamada pelas sugestões e pelo input.
+     */
+    function askLanding(text) {
+      // Reset do input
+      $landingInput.value = '';
+      $landingInput.style.height = 'auto';
+      $landingSend.disabled = true;
+
+      // Abrir o painel flutuante do chatbot
+      if (typeof openChat === 'function') openChat();
+
+      // Enviar a mensagem para o chatbot
+      // (a função sendMessage do chatbot está definida mais abaixo no script
+      //  do chatbot; usamos setTimeout para dar tempo ao painel abrir)
+      setTimeout(() => {
+        if (typeof sendMessage === 'function') sendMessage(text);
+      }, 150);
+    }
+    window.askLanding = askLanding;
   </script>
 
   <!--
@@ -2448,6 +3230,12 @@
         topCareers,
       };
     }
+
+    // Expor globalmente para que askLanding (na landing) consiga
+    // abrir o painel do chatbot e enviar uma pergunta.
+    window.openChat = openChat;
+    window.closeChat = closeChat;
+    window.sendMessage = sendMessage;
   </script>
 
 </body>
