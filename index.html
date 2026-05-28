@@ -34,8 +34,8 @@
       --surface-2: #f1f0ec;     /* zonas alternativas (hover, chips) */
       --border: #e5e3dd;        /* linhas e contornos subtis */
       --text: #1a1a1a;          /* texto principal */
-      --text-muted: #6b6b6b;    /* texto secundário, labels */
-      --text-soft: #9a9a9a;     /* texto terciário, placeholders */
+      --text-muted: #595959;    /* Escurecido para melhor contraste (WCAG AA) */
+      --text-soft: #757575;     /* Escurecido de #9a9a9a para passar no rácio 4.5:1 */
 
       /* Accent verde */
       --accent: #047857;        /* verde esmeralda, sério mas vivo */
@@ -77,6 +77,11 @@
       font-feature-settings: 'ss01' on, 'cv11' on;
       line-height: 1.5;
       overflow: hidden;
+      font-size: 16px; /* Base size */
+    }
+    @media (max-width: 480px) {
+      html { font-size: 14px; }
+      * { min-font-size: 10px; }
     }
     body {
       height: 100%;
@@ -87,11 +92,6 @@
          por cima do html mas por baixo do main (z-index 1). */
       background: transparent;
       overflow: hidden;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
       min-height: 100vh;
     }
 
@@ -257,7 +257,7 @@
     .btn-primary:hover { background: var(--accent-hover); }
     .btn-primary:disabled {
       background: var(--surface-2);
-      color: var(--text-soft);
+      color: #8c8c8c; /* Escurecido para melhor visibilidade em fundo claro */
       cursor: not-allowed;
     }
 
@@ -595,14 +595,14 @@
       cursor: pointer;
     }
     .btn-favorite:hover {
-      border-color: #f43f5e;
-      color: #f43f5e;
-      background: #fff1f2;
+      border-color: #b45309;
+      color: #b45309;
+      background: #fffbeb;
     }
     .btn-favorite.active {
-      background: #f43f5e;
+      background: #b45309;
       color: white;
-      border-color: #f43f5e;
+      border-color: #b45309;
     }
     .btn-favorite svg {
       width: 18px;
@@ -698,11 +698,11 @@
       position: absolute;
       left: 0; top: 6px;
       width: 20px; height: 20px;
-      background: var(--surface-2);
+      background: var(--accent);
       border-radius: 50%;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
-      color: var(--text-muted);
+      color: white;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -812,7 +812,7 @@
       header { padding: 16px 20px; }
       main { padding: 24px 16px 220px; }
       .result-card { padding: 20px; }
-      .nav { flex-direction: row-reverse; }
+      .nav { flex-direction: row; }
       h1 { font-size: 26px; }
       .landscape { height: 220px; }
     }
@@ -1362,10 +1362,10 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background: var(--accent);
+      background: #000000;
       color: white;
       border: none;
-      box-shadow: 0 8px 24px rgba(4, 120, 87, 0.35), 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0,0,0,0.1);
       cursor: pointer;
       z-index: 50;                  /* acima de tudo */
       display: flex;
@@ -1375,7 +1375,7 @@
     }
     .chat-fab:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(4, 120, 87, 0.4), 0 3px 8px rgba(0,0,0,0.12);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25), 0 3px 8px rgba(0,0,0,0.12);
     }
     .chat-fab svg { width: 24px; height: 24px; }
 
@@ -1618,6 +1618,140 @@
       .chat-fab, .chat-panel { display: none !important; }
     }
 
+    /*
+      ============================================================
+      20. APRESENTAÇÃO
+      ============================================================
+    */
+    .presentation-screen .slide-content {
+      padding: 40px 0;
+    }
+    .presentation-screen h2 {
+      margin-bottom: 24px;
+      font-size: 28px;
+    }
+    .tech-flow-illustration {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 40px 0;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: var(--r-lg);
+    }
+    .tech-box {
+      flex: 1;
+      text-align: center;
+      padding: 20px;
+      background: white;
+      border-radius: var(--r);
+      box-shadow: var(--shadow-sm);
+    }
+    .tech-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    .tech-box strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    .tech-box p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .tech-arrow {
+      font-size: 24px;
+      color: var(--text-soft);
+      font-weight: bold;
+    }
+    .tech-details {
+      margin-top: 32px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+    .product-decisions {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .product-decisions li {
+      padding: 16px;
+      background: white;
+      border-radius: var(--r);
+      font-size: 14px;
+      box-shadow: var(--shadow-sm);
+      line-height: 1.5;
+    }
+    .product-decisions li strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .lorem-content {
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+    .lorem-content p {
+      margin-bottom: 16px;
+    }
+
+    /* Hide landscape on presentation */
+    body.presentation-mode .landscape {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .tech-flow-illustration {
+        flex-direction: column;
+      }
+      .tech-arrow {
+        transform: rotate(90deg);
+      }
+    }
+
+    .path-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .path-card-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      background: white;
+    }
+    .path-card-header:hover { background: var(--surface-2); }
+    .path-card-title { font-weight: 600; font-size: 15px; }
+    .path-card-date { font-size: 12px; color: var(--text-soft); }
+    .path-card-content {
+      display: none;
+      padding: 0 20px 20px;
+      border-top: 1px solid var(--border);
+      background: #fafafa;
+    }
+    .path-card.open .path-card-content { display: block; }
+    .path-card-chevron {
+      transition: transform 0.2s ease;
+      color: var(--text-soft);
+    }
+    .path-card.open .path-card-chevron { transform: rotate(180deg); }
+    
+    .path-result-mini {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .path-result-mini:last-child { border-bottom: none; }
+    .path-result-mini-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+    .path-result-mini-score { font-size: 12px; color: var(--accent); font-weight: 600; }
+
   </style>
 </head>
 <body>
@@ -1733,6 +1867,20 @@
           </span>
           <span class="label">Favoritos</span>
         </button>
+
+        <!-- Apresentação -->
+        <button class="sidebar-item" data-area="presentation"
+                onclick="navigateTo('presentation')" title="Apresentação">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </span>
+          <span class="label">Apresentação</span>
+        </button>
       </nav>
 
       <!-- Footer: Definições -->
@@ -1793,10 +1941,6 @@
                       onclick="askLanding('Como funciona o concurso nacional de acesso ao ensino superior?')">
                 Como funciona o CNA?
               </button>
-              <button class="landing-chat-suggestion"
-                      onclick="askLanding('Que cursos posso seguir se gosto da área de letras?')">
-                Cursos de letras
-              </button>
             </div>
 
             <div class="landing-chat-input-row">
@@ -1832,17 +1976,184 @@
         ============================================================
       -->
       <section id="screen-my-paths" class="screen">
-        <div class="placeholder-area">
-          <div class="placeholder-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="4" width="18" height="16" rx="2"/>
-              <path d="M8 10l3 3 5-5"/>
-            </svg>
-          </div>
+        <div class="results-intro">
           <h2>Os meus percursos</h2>
-          <p>Aqui vão aparecer os percursos profissionais que recomendámos para ti, e os que guardaste para revisitar mais tarde. Esta área estará disponível em breve.</p>
-          <button class="btn btn-outline" onclick="navigateTo('landing')">← Voltar à página inicial</button>
+          <p class="hint">Aqui encontras o histórico de todos os inquéritos que realizaste.</p>
+        </div>
+        <div id="paths-list">
+          <div class="placeholder-area">
+            <div class="placeholder-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="16" rx="2"/>
+                <path d="M8 10l3 3 5-5"/>
+              </svg>
+            </div>
+            <p>Ainda não realizaste nenhum percurso completo.</p>
+            <button class="btn btn-outline" onclick="navigateTo('landing')">← Começar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- APRESENTAÇÃO — PASSO 1: Arquitetura Técnica -->
+      <section id="screen-presentation-1" class="screen presentation-screen">
+        <div class="progress">
+          <div class="progress-track"><div class="progress-fill" style="width:25%"></div></div>
+          <span class="progress-label">1 de 4</span>
+        </div>
+        <div class="slide-content">
+          <p class="eyebrow">Arquitetura Técnica</p>
+          <h2>Como tudo funciona nos bastidores</h2>
+          
+          <div class="tech-flow-illustration">
+            <div class="tech-box">
+              <div class="tech-icon">🌐</div>
+              <strong>Frontend</strong>
+              <p>HTML5, CSS3 (Moderno) & Vanilla JavaScript</p>
+            </div>
+            <div class="tech-arrow">→</div>
+            <div class="tech-box">
+              <div class="tech-icon">☁️</div>
+              <strong>Backend / Hosting</strong>
+              <p>Netlify Functions (Serverless) & Netlify Hosting</p>
+            </div>
+            <div class="tech-arrow">→</div>
+            <div class="tech-box">
+              <div class="tech-icon">🤖</div>
+              <strong>AI Core</strong>
+              <p>OpenAI API (GPT-4o-mini)</p>
+            </div>
+          </div>
+
+          <div class="tech-details">
+            <p>A web app é uma <strong>Single Page Application (SPA)</strong> focada em performance e simplicidade. O código está alojado no <strong>GitHub</strong>, com deploy contínuo via <strong>Netlify</strong>.</p>
+          </div>
+        </div>
+
+        <div class="nav">
+          <button class="btn btn-ghost" onclick="navigateTo('landing')">Sair</button>
+          <button class="btn btn-primary" onclick="showPresentationStep(2)">Continuar →</button>
+        </div>
+      </section>
+
+      <!-- APRESENTAÇÃO — PASSO 2: Decisões de Produto -->
+      <section id="screen-presentation-2" class="screen presentation-screen">
+        <div class="progress">
+          <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
+          <span class="progress-label">2 de 4</span>
+        </div>
+        <div class="slide-content">
+          <p class="eyebrow">Decisões de Produto</p>
+          <h2>Estratégia e Justificação</h2>
+          
+          <ul class="product-decisions">
+            <li><strong>1. Fluxo Único:</strong> Foco total numa jornada linear para evitar dispersão e encontrar opções rapidamente.</li>
+            <li><strong>2. Jornada Curta e Relevante:</strong> Respeito pelo tempo do utilizador, mantendo a profundidade necessária.</li>
+            <li><strong>3. Área Pessoal:</strong> Histórico de resultados para que o progresso não seja perdido.</li>
+            <li><strong>4. Favoritos:</strong> Possibilidade de guardar cursos para consulta e comparação posterior.</li>
+            <li><strong>5. Estilo Tranquilizador:</strong> Design "soft" e motivador para reduzir a ansiedade da escolha.</li>
+            <li><strong>6. AI Chatbot Ubíquo:</strong> Apoio constante e discussão de ideias desde as boas-vindas.</li>
+            <li><strong>7. Sem Gamificação:</strong> Foco na seriedade do percurso, sem distrações sociais ou mecânicas de jogo.</li>
+            <li><strong>8. Totalmente Responsive:</strong> Acessibilidade garantida em qualquer dispositivo (Mobile-First).</li>
+          </ul>
+        </div>
+
+        <div class="nav">
+          <button class="btn btn-ghost" onclick="showPresentationStep(1)">← Voltar</button>
+          <button class="btn btn-primary" onclick="showPresentationStep(3)">Continuar →</button>
+        </div>
+      </section>
+
+      <!-- APRESENTAÇÃO — PASSO 3: Feedback dos Testes -->
+      <section id="screen-presentation-3" class="screen presentation-screen">
+        <div class="progress">
+          <div class="progress-track"><div class="progress-fill" style="width:75%"></div></div>
+          <span class="progress-label">3 de 4</span>
+        </div>
+        <div class="slide-content">
+          <p class="eyebrow">Feedback dos Testes</p>
+          <h2>Resultados Observados</h2>
+          
+          <div class="persona-card" style="background: white; padding: 24px; border-radius: var(--r); box-shadow: var(--shadow-sm); border-left: 4px solid var(--accent); max-width: 500px; margin: 20px 0;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+              <div style="width: 48px; height: 48px; background: var(--accent-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px;">👩</div>
+              <div>
+                <strong style="display: block; font-size: 16px;">Joana, 39 anos</strong>
+                <span style="font-size: 13px; color: var(--text-muted);">Utilizadora de Teste</span>
+              </div>
+            </div>
+            <p style="font-style: italic; color: var(--text); line-height: 1.6;">"Gostei da experiência e utilizei o chat. Ajudou-me a descobrir quais as universidades onde se pode estudar Medicina. Os resultados bateram certo com os meus interesses em humanidades e jornalismo."</p>
+          </div>
+
+          <div class="persona-card" style="background: white; padding: 24px; border-radius: var(--r); box-shadow: var(--shadow-sm); border-left: 4px solid var(--accent); max-width: 500px; margin: 20px 0;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+              <div style="width: 48px; height: 48px; background: var(--accent-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px;">👩‍🏫</div>
+              <div>
+                <strong style="display: block; font-size: 16px;">Maria, 62 anos</strong>
+                <span style="font-size: 13px; color: var(--text-muted);">Professora</span>
+              </div>
+            </div>
+            <p style="font-style: italic; color: var(--text); line-height: 1.6;">"Fiz 3x o teste, com coisas diferentes. Acho que dá informação muito pertinente e útil, mas penso que só falta uma coisa... dizer as Universidades, Institutos, etc. onde existem os cursos sugeridos. (...) Como a pessoa refere a área preferencial, podia dizer as instituições num raio de 50km, por exemplo."</p>
+          </div>
+
+          <div class="persona-card" style="background: white; padding: 24px; border-radius: var(--r); box-shadow: var(--shadow-sm); border-left: 4px solid var(--accent); max-width: 500px; margin: 20px 0;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+              <div style="width: 48px; height: 48px; background: var(--accent-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px;">🎨</div>
+              <div>
+                <strong style="display: block; font-size: 16px;">Sheilla</strong>
+                <span style="font-size: 13px; color: var(--text-muted);">Utilizadora de Teste</span>
+              </div>
+            </div>
+            <p style="font-style: italic; color: var(--text); line-height: 1.6;">"O resultado funcionou comigo, deu 70% em Design, que é realmente a minha formação :D"</p>
+          </div>
+        </div>
+
+        <div class="nav">
+          <button class="btn btn-ghost" onclick="showPresentationStep(2)">← Voltar</button>
+          <button class="btn btn-primary" onclick="showPresentationStep(4)">Continuar →</button>
+        </div>
+      </section>
+
+      <!-- APRESENTAÇÃO — PASSO 4: Dificuldades e Futuro -->
+      <section id="screen-presentation-4" class="screen presentation-screen">
+        <div class="progress">
+          <div class="progress-track"><div class="progress-fill" style="width:80%"></div></div>
+          <span class="progress-label">4 de 5</span>
+        </div>
+        <div class="slide-content">
+          <p class="eyebrow">Dificuldades e Aprendizagem</p>
+          <h2>O que foi mais difícil e o que faria diferente</h2>
+          
+          <ul class="product-decisions" style="grid-template-columns: 1fr;">
+            <li style="border-left: 3px solid var(--text-soft);">Foi difícil compactar todas as alterações necessárias em poucos pedidos para gerir os créditos das diferentes apps.</li>
+            <li style="border-left: 3px solid var(--text-soft);">Foi difícil decidir inicialmente o que criar, que funcionalidades lançar com o MVP e quais deixar para outras fases, sem deixar o produto "coxo".</li>
+            <li style="border-left: 3px solid var(--text-soft);">Foi difícil acertar com a ilustração que queria.</li>
+            <li style="border-left: 3px solid var(--accent);">O que faria diferente nesta fase seria ensinar melhor o modelo acerca dos cursos e universidades a sugerir, facultando uma lista completa e pormenorizada como base de dados para ele se basear.</li>
+            <li style="border-left: 3px solid var(--accent);">Gostaria também de ter mais tempo para afinar o produto e a experiência de maneira a não ter páginas em desenvolvimento.</li>
+          </ul>
+        </div>
+
+        <div class="nav">
+          <button class="btn btn-ghost" onclick="showPresentationStep(3)">← Voltar</button>
+          <button class="btn btn-primary" onclick="showPresentationStep(5)">Continuar →</button>
+        </div>
+      </section>
+
+      <!-- APRESENTAÇÃO — PASSO 5: Agradecimento Final -->
+      <section id="screen-presentation-5" class="screen presentation-screen">
+        <div class="progress">
+          <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+          <span class="progress-label">5 de 5</span>
+        </div>
+        <div class="slide-content" style="text-align: center; padding: 60px 0;">
+          <div style="font-size: 80px; margin-bottom: 24px; opacity: 0.9;">👋✨</div>
+          <h2 style="font-size: 32px; margin-bottom: 16px;">Obrigado pela atenção!</h2>
+          <p class="lead" style="margin: 0 auto 40px;">Espero que o <strong>Rumo Certo</strong> seja uma ferramenta útil para ajudar jovens a navegar o seu futuro com mais confiança e clareza.</p>
+        </div>
+
+        <div class="nav">
+          <button class="btn btn-ghost" onclick="showPresentationStep(4)">← Voltar</button>
+          <button class="btn btn-primary" onclick="navigateTo('landing')">Finalizar Apresentação</button>
         </div>
       </section>
 
@@ -2072,6 +2383,7 @@
         <div id="results-list"></div>
 
         <div class="results-actions">
+          <button class="btn btn-primary" id="save-results-btn" onclick="saveCurrentPath()">Guardar este percurso</button>
           <button class="btn btn-outline" onclick="restart()">↺ Refazer questionário</button>
           <button class="btn btn-ghost" onclick="window.print()">Imprimir / guardar PDF</button>
         </div>
@@ -2408,7 +2720,8 @@
       grade: null,                   // número 0-20
       location: "",                  // texto livre
       educationType: null,            // "superior" | "profissional" | "indiferente"
-      favorites: []                  // caminhos guardados
+      favorites: JSON.parse(localStorage.getItem('rumocerto-favorites') || '[]'),
+      savedPaths: JSON.parse(localStorage.getItem('rumocerto-paths') || '[]')
     };
 
     // Ordem dos ecrãs do questionário — usada por goNext/goBack.
@@ -2828,8 +3141,8 @@
               <button class="btn-favorite ${isFavorited ? 'active' : ''}" 
                       onclick="toggleFavorite('${m.title.replace(/'/g, "\\'")}')" 
                       title="${isFavorited ? 'Remover dos favoritos' : 'Guardar nos favoritos'}">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9 12 2"/>
                 </svg>
               </button>
             </div>
@@ -2880,6 +3193,7 @@
         const item = matches.find(m => m.title === title);
         if (item) state.favorites.push(item);
       }
+      localStorage.setItem('rumocerto-favorites', JSON.stringify(state.favorites));
       renderResults();
        if (state.currentScreen === 'screen-favorites') renderFavorites();
      }
@@ -2911,8 +3225,8 @@
                <button class="btn-favorite active" 
                        onclick="toggleFavorite('${m.title.replace(/'/g, "\\'")}')" 
                        title="Remover dos favoritos">
-                 <svg viewBox="0 0 24 24">
-                   <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                   <polygon points="12 2 15 9 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 9 12 2"/>
                  </svg>
                </button>
              </div>
@@ -2961,6 +3275,86 @@
     window.toggleActivity = toggleActivity;
     window.selectEducationType = selectEducationType;
     window.toggleFavorite = toggleFavorite;
+
+    /**
+     * Guarda o percurso atual no LocalStorage
+     */
+    function saveCurrentPath() {
+      const matches = computeMatches();
+      const pathData = {
+        id: Date.now(),
+        date: new Date().toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' }),
+        results: matches.map(m => ({ title: m.title, score: m.score }))
+      };
+      
+      state.savedPaths.unshift(pathData);
+      localStorage.setItem('rumocerto-paths', JSON.stringify(state.savedPaths));
+      
+      const btn = document.getElementById('save-results-btn');
+      btn.textContent = 'Percurso Guardado ✓';
+      btn.disabled = true;
+      btn.style.background = 'var(--text-soft)';
+    }
+    window.saveCurrentPath = saveCurrentPath;
+
+    /**
+     * Renderiza a lista de percursos guardados
+     */
+    function renderSavedPaths() {
+      const list = document.getElementById("paths-list");
+      if (!state.savedPaths.length) {
+        list.innerHTML = `
+          <div class="placeholder-area">
+            <div class="placeholder-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="16" rx="2"/>
+                <path d="M8 10l3 3 5-5"/>
+              </svg>
+            </div>
+            <p>Ainda não realizaste nenhum percurso completo.</p>
+            <button class="btn btn-outline" onclick="navigateTo('landing')">← Começar</button>
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = state.savedPaths.map(path => `
+        <div class="path-card" id="path-${path.id}">
+          <div class="path-card-header" onclick="togglePathCard(${path.id})">
+            <div>
+              <div class="path-card-title">Percurso de ${path.date}</div>
+              <div class="path-card-date">${path.results.length} resultados encontrados</div>
+            </div>
+            <svg class="path-card-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <div class="path-card-content">
+            ${path.results.map(r => `
+              <div class="path-result-mini">
+                <div class="path-result-mini-title">${r.title}</div>
+                <div class="path-result-mini-score">${r.score}% compatível</div>
+              </div>
+            `).join("")}
+            <button class="btn btn-ghost" style="margin-top:16px; font-size:12px; padding:8px 0;" onclick="deletePath(${path.id})">Eliminar percurso</button>
+          </div>
+        </div>
+      `).join("");
+    }
+    window.renderSavedPaths = renderSavedPaths;
+
+    function togglePathCard(id) {
+      document.getElementById(`path-${id}`).classList.toggle('open');
+    }
+    window.togglePathCard = togglePathCard;
+
+    function deletePath(id) {
+      state.savedPaths = state.savedPaths.filter(p => p.id !== id);
+      localStorage.setItem('rumocerto-paths', JSON.stringify(state.savedPaths));
+      renderSavedPaths();
+    }
+    window.deletePath = deletePath;
 
     /*
       ============================================================
@@ -3013,9 +3407,17 @@
         'explore':    'screen-explore',
         'resources':  'screen-resources',
         'favorites':  'screen-favorites',
+        'presentation': 'screen-presentation-1',
         'settings':   'screen-settings',
       };
       const targetId = screenMap[area] || 'screen-landing';
+
+      // Gerir classe de apresentação no body para esconder a paisagem
+      if (area === 'presentation') {
+        document.body.classList.add('presentation-mode');
+      } else {
+        document.body.classList.remove('presentation-mode');
+      }
 
       // Esconder todos os ecrãs, mostrar o alvo
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -3023,6 +3425,7 @@
       if (target) {
         target.classList.add('active');
         if (area === 'favorites') renderFavorites();
+        if (area === 'my-paths') renderSavedPaths();
       }
 
       // Atualizar estado interno da app
@@ -3036,6 +3439,20 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     window.navigateTo = navigateTo;
+
+    /**
+     * Navegação entre passos da apresentação
+     */
+    function showPresentationStep(step) {
+      document.querySelectorAll('.presentation-screen').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById(`screen-presentation-${step}`);
+      if (target) {
+        target.classList.add('active');
+        state.currentScreen = `screen-presentation-${step}`;
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.showPresentationStep = showPresentationStep;
 
     /*
       ============================================================
